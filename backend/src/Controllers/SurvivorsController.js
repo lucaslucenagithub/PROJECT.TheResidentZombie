@@ -6,7 +6,7 @@ module.exports = {
             const { name, age, latitude, longitude } = req.body
 
             const survivorSaved = await Survivors.create({ name, age, latitude, longitude })
-
+            
             return res.json(survivorSaved);
             
         } catch (error) {
