@@ -4,8 +4,16 @@
   "description": "backend solution for this project",
   "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index .js"
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
+    "pretest": "cross-env NODE_ENV=test npm run db:reset",
+    "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
+    "db:migrate:test": "cross-env NODE_ENV=test npx sequelize db:migrate"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "author": "Lucas Lucena",
   "license": "ISC",
@@ -17,6 +25,9 @@
     "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "cross-env": "^7.0.2",
+    "jest": "^26.4.0",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
   }
 }
