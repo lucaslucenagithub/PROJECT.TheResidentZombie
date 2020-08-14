@@ -1,9 +1,11 @@
 const express = require('express')
 
+// Controllers
+const SurvivorController = require('./Controllers/SurvivorsController')
+
 const routes = express.Router()
 
-routes.get('/', (req, res) => {
-    return res.json({ hello: "world" })
-})
+// Routes
+routes.post('/survivors', SurvivorController.store)
 
 module.exports = routes;
