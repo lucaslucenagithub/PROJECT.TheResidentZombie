@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../../src/index.js')
 const db = require('../../src/Models/Survivor')
 
-describe('Survivor Create Routes', () => {
+describe('Survivor Routes', () => {
 
     afterAll(async () => {
       await db.destroy({

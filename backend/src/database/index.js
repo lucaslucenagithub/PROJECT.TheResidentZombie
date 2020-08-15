@@ -3,6 +3,8 @@ const dbConfig = require('../configurations/database')
 
 // Models
 const Survivors = require('../Models/Survivor')
+const Item = require('../Models/Item')
+const SurvivorItem = require('../Models/SurvivorItem')
 
 var environment = process.env.NODE_ENV
 
@@ -12,5 +14,7 @@ const connection = new Sequelize(config)
 
 // Models Init
 Survivors.init(connection)
+Item.init(connection)
+SurvivorItem.init(connection)
 
 module.exports = connection
