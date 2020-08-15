@@ -1,4 +1,6 @@
 const SurvivorItem = require('../Models/SurvivorItem')
+const itemsService = require('./itemsService')
+const { Error } = require('sequelize')
 
 module.exports = {
 
@@ -16,5 +18,20 @@ module.exports = {
 
         return itemsSaved
 
+    },
+
+    async GetByIdSurvivor(id) {
+
+        const inventory = await SurvivorItem.findAll({
+            where: {
+                survivor_id: id
+            },
+            include: ['survivors', 'items']
+        })
+
+        if (inventory[0].survivor.infected)
+            return new Error("Infected persons can't open the inventory")
+
+        return inventory;
     }
 }

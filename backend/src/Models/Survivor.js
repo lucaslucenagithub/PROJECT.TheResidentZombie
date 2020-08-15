@@ -38,6 +38,7 @@ class Survivor extends Model {
                 }
             },
             infected: DataTypes.BOOLEAN,
+            times_infected_report: DataTypes.INTEGER
         }, {
             sequelize: connection
         })

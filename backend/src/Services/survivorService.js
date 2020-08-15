@@ -52,6 +52,38 @@ module.exports = {
         )
 
         return { survivor: survivorUpdated }
+    },
+
+    async Infect(idSurvivor) {
+
+        const reportsForInfectedStatus = 5
+
+        const survivorExists = await Survivors.findByPk(idSurvivor);
+
+        if (!survivorExists)
+            return new Error("There's no survivor with this id")
+
+        if (survivorExists.times_infected_report >= reportsForInfectedStatus)
+            return new Error("Already infected person")
+
+        survivorExists.times_infected_report = survivorExists.times_infected_report + 1
+
+        const survivorUpdated = await Survivors.update({
+            name: survivorExists.name,
+            age: survivorExists.age,
+            latitude: survivorExists.latitude,
+            longitude: survivorExists.longitude,
+            infected: survivorExists.times_infected_report >= reportsForInfectedStatus ? true : false,
+            times_infected_report: survivorExists.times_infected_report
+        },
+            {
+                where: {
+                    id: survivorExists.id
+                }
+            }
+        )
+
+        return { survivor: survivorUpdated }
     }
 
 }

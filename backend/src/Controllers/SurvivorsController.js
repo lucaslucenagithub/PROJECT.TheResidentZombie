@@ -16,7 +16,7 @@ module.exports = {
             return res.json(result);
 
         } catch (error) {
-            return res.status(400).send(({ message: error['message'] }))
+            return res.status(400).send(({ message: error['message'] ? error['message'] : 'an error ocurred' }))
         }
     },
 
@@ -35,7 +35,20 @@ module.exports = {
             return res.json(result);
 
         } catch (error) {
-            return res.status(400).send(({ message: error['message'] }))
+            return res.status(400).send(({ message: error['message'] ? error['message'] : 'an error ocurred' }))
+        }
+    },
+
+    async infect(req, res) {
+        try {
+            const { survivorId } = req.params;
+
+            const result = survivorService.Infect(survivorId)
+
+            return res.json(result);
+            
+        } catch (error) {
+            return res.status(400).send(({ message: error['message'] ? error['message'] : 'an error ocurred' }))
         }
     }
 }
