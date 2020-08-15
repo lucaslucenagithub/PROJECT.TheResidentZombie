@@ -29,6 +29,24 @@ module.exports = {
         })
 
         return { survivor: survivorSaved, items: itemsSaved }
+    },
+
+    async Update(survivor) {
+
+        const survivorUpdated = await Survivors.update({
+            name: survivor.name,
+            age: survivor.age,
+            latitude: survivor.latitude,
+            longitude: survivor.longitude
+        },
+            {
+                where: {
+                    id: survivor.id
+                }
+            }
+        )
+
+        return { survivor: survivorUpdated }
     }
 
 }
