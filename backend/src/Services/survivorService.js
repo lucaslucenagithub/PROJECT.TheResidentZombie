@@ -33,6 +33,11 @@ module.exports = {
 
     async Update(survivor) {
 
+        const survivorExists = await Survivors.findByPk(survivor.id);
+
+        if (!survivorExists)
+            return new Error("There's no survivor with this id")
+
         const survivorUpdated = await Survivors.update({
             name: survivor.name,
             age: survivor.age,
