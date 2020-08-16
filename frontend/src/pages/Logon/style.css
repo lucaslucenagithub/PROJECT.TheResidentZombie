@@ -13,17 +13,17 @@
   align-items: center;
 }
 
-.logon-container .form-logon form {
+.logon-container .form-logon > form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.logon-container .form-logon form input {
-  display: flex;
+.logon-container .form-logon form > input {
+  display: flex;  
   flex-direction: column;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 2px;
   min-width: 18em;
   height: 37px;
   padding: 0px 10px;
@@ -45,4 +45,10 @@
   border-radius: 3px;
   transition: all 250ms ease-in-out;
   cursor: pointer;
+}
+
+.back-link{
+  margin-top: 2em;
+  color: #fff;
+  text-decoration-line: none;
 }

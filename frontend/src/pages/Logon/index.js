@@ -35,8 +35,8 @@ export default function Logon() {
                 <form onSubmit={handleLogin}>
                     <h1 className="header"> Login </h1>
                     <input placeholder="username" value={username} onChange={e => setUsername(e.target.value)} />
-                    <input placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <button className="button-login" type="submit"> Entrar </button>
+                    <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <button className="button-login" type="submit"> Login </button>
                     <Link className="back-link" to="/signup">
                         Create an account
                     </Link>

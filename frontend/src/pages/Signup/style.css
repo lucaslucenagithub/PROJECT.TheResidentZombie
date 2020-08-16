@@ -1,4 +1,4 @@
-.register-container .content section .header-signup {
+.register-container .content > section .header-signup {
   font-size: 28px;
   color: #ffffff;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.register-container .content section p {
+.register-container .content > section p {
   font-size: 20px;
   color: #ffffff;
   display: flex;
@@ -14,18 +14,17 @@
   align-items: center;
 }
 
-.register-container .content form {
+.register-container .content > form {
   margin-top: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.register-container .content form input {
+.register-container .content form > input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 6px;
   min-width: 18em;
   height: 37px;
   padding: 0px 10px;
@@ -39,6 +38,7 @@
 }
 
 .button-signup {
+  margin-top: 2em;
   font-size: 21px;
   padding: 5px 20px;
   border: 0;
@@ -47,4 +47,45 @@
   border-radius: 3px;
   transition: all 250ms ease-in-out;
   cursor: pointer;
+}
+
+.register-container form .items-table {
+  background-color: #f3f3f3;
+  padding: 5px 20px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 18px;
+  table-layout: fixed;
+  min-width: 18em;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 0.9em;
+}
+
+table {
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+.register-container form .items-table tbody input {
+  width: 90px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  border: 0;
+  border-radius: 4px;
+  transition: all 250ms ease-in-out;
+  padding: 5px 20px;
+}
+
+.register-container form .items-table > tr {
+  margin-bottom: 48px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
