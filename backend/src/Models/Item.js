@@ -14,6 +14,10 @@ class Item extends Model {
             timestamps: false
         })
     }
+
+    static associate(models) {
+        this.hasMany(models.SurvivorItem, {foreignKey: 'item_id'})
+    }
 }
 
 module.exports = Item

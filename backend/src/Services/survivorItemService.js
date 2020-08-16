@@ -1,6 +1,8 @@
 const SurvivorItem = require('../Models/SurvivorItem')
 const itemsService = require('./itemsService')
-const { Error } = require('sequelize')
+
+const Survivor = require('../Models/Survivor')
+const Item = require('../Models/Item')
 
 module.exports = {
 
@@ -26,12 +28,19 @@ module.exports = {
             where: {
                 survivor_id: id
             },
-            include: ['survivors', 'items']
+            include: [Survivor, Item]
         })
 
-        if (inventory[0].survivor.infected)
-            return new Error("Infected persons can't open the inventory")
+        if (inventory[0].dataValues.Survivor.dataValues.infected)
+            throw new Error("Infected persons can't open the inventory")
 
-        return inventory;
+        let items = new Array()
+
+        for (let index = 0; index < inventory.length; index++) {
+            items.push(inventory[index].dataValues.Item)
+            items[index].dataValues.amount = inventory[index].dataValues.amount
+        }
+
+        return items;
     }
 }

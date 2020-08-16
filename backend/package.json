@@ -6,7 +6,7 @@
   "scripts": {
     "set-node-env-dev": "export NODE_ENV=Development",
     "set-node-env-test": "export NODE_ENV=test",
-    "test": "yarn run set-node-env-test && jest --verbose --silent",
+    "test": "yarn run set-node-env-test && sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all && jest --verbose --silent",
     "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
     "db:migrate:test": "cross-env NODE_ENV=test npx sequelize db:migrate",
     "devStart": "yarn run set-node-env-dev && nodemon",
@@ -21,6 +21,7 @@
   "author": "Lucas Lucena",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "pg": "^8.3.0",

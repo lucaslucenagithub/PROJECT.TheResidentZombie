@@ -5,22 +5,21 @@
   align-items: center;
 }
 
-.logon-container .form .header {
-  font-size: 24px;
+.logon-container .form-logon .header {
+  font-size: 28px;
   color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-form {
-  margin-top: 20em;
+.logon-container .form-logon form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-form input {
+.logon-container .form-logon form input {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,7 +36,7 @@ form input {
   transition: all 250ms ease-in-out;
 }
 
-.button {
+.button-login {
   font-size: 21px;
   padding: 5px 20px;
   border: 0;
@@ -46,10 +45,4 @@ form input {
   border-radius: 3px;
   transition: all 250ms ease-in-out;
   cursor: pointer;
-}
-
-.back-link{
-  margin-top: 10em;
-  color: #fff;
-  text-decoration-line: none;  
 }

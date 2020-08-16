@@ -34,10 +34,10 @@ export default function SignUp() {
         <div className="register-container">
             <div className="content">
                 <section>
-                    <h1> Sign up </h1>
+                    <h1 className="header-signup"> Sign up </h1>
                     <p> Register your survivor account </p>
                 </section>
-                <form onSubmit={handleSignup}>
+                <form className="form-signup" onSubmit={handleSignup}>
                     <input placeholder="username" value={username} onChange={e => setUsername(e.target.value)} />
                     <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
                     <input type="number" placeholder="age" value={age} onChange={e => setAge(e.target.value)} />
@@ -45,7 +45,7 @@ export default function SignUp() {
                         <input placeholder="Cidade" value={city} onChange={e => setCity(e.target.value)} />
                         <input placeholder="UF" value={uf} onChange={e => setUf(e.target.value)} style={{ width: 80 }} />
                     </div> */}
-                    <button className="button" type="submit"> Sign up </button>
+                    <button className="button-signup" type="submit"> Sign up </button>
                     <Link className="back-link" to="/">
                         Back to login
                     </Link>

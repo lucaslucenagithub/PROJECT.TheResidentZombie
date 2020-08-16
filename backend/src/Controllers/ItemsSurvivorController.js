@@ -4,7 +4,7 @@ module.exports = {
     async index(req, res) {
         try {
 
-            const { survivorId } = req.param
+            const { survivorId } = req.params
 
             var result = await survivorItemService.GetByIdSurvivor(survivorId)
 

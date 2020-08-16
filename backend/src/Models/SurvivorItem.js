@@ -18,6 +18,11 @@ class SurvivorItem extends Model {
             tableName: 'survivor_item'
         })
     }
+
+    static associate(models) {
+        this.belongsTo(models.Survivor, { foreignKey: 'survivor_id' });
+        this.belongsTo(models.Item, { foreignKey: 'item_id' });
+    }
 }
 
 module.exports = SurvivorItem

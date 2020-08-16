@@ -1,8 +1,8 @@
 const request = require('supertest')
 const app = require('../../src/index.js')
-const db = require('../../src/Models/Item')
+const db = require('../../src/Models/SurvivorItem')
 
-describe('Items Routes', () => {
+describe('Survivor Items Routes', () => {
 
     afterAll(async () => {
         await db.destroy({
@@ -10,12 +10,13 @@ describe('Items Routes', () => {
           truncate: true
         })
         
-    await db.sequelize.close()
+        await db.sequelize.close()
     }),
 
-    it('should return all registers', async () => {
+    it('should return all items of a survivor by its id', async () => {
         const res = await request(app)
-            .get('/items')
+            .get('/survivor/1/items')
+
         expect(res.statusCode).toEqual(200)
     })
 })

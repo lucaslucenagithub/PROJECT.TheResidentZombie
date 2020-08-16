@@ -30,13 +30,13 @@ export default function Logon() {
 
     return (
         <div className="logon-container">
-            <section className="form">
+            <section className="form-logon">
 
                 <form onSubmit={handleLogin}>
                     <h1 className="header"> Login </h1>
                     <input placeholder="username" value={username} onChange={e => setUsername(e.target.value)} />
                     <input placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <button className="button" type="submit"> Entrar </button>
+                    <button className="button-login" type="submit"> Entrar </button>
                     <Link className="back-link" to="/signup">
                         Create an account
                     </Link>

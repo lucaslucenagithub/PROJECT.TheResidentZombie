@@ -17,4 +17,9 @@ Survivors.init(connection)
 Item.init(connection)
 SurvivorItem.init(connection)
 
+// Models associate
+Survivors.associate(connection.models);
+Item.associate(connection.models);
+SurvivorItem.associate(connection.models);
+
 module.exports = connection

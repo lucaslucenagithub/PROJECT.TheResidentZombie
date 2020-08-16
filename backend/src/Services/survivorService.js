@@ -1,7 +1,8 @@
 const Survivors = require('../Models/Survivor')
+const SurvivorItem = require('../Models/SurvivorItem')
 
+const survivorItemService = require('./survivorItemService')
 const itemsService = require('../Services/itemsService')
-const survivorItemService = require('../Services/survivorItemService')
 
 const arrayUtils = require('../utils/arrayUtils')
 
@@ -16,19 +17,25 @@ module.exports = {
         if (!arrayUtils.FirstArrayContainAllSecond(availableItemsIds, itemsId))
             return new Error("one or more of the items is not valid")
 
-        const survivorSaved = await Survivors.create({
+        return Promise.all([Survivors.create({
             name: survivor.name,
             age: survivor.age,
             latitude: survivor.latitude,
             longitude: survivor.longitude
-        })
+        })])
+            .then(async function ([survivorSaved]) {
 
-        const itemsSaved = await survivorItemService.New({
-            survivorId: survivorSaved.id,
-            items: survivor.items
-        })
+                const itemsSurvivorSaved = await survivorItemService.New({
+                    items: survivor.items
+                    , survivorId: survivorSaved.id
+                })
 
-        return { survivor: survivorSaved, items: itemsSaved }
+                return { survivor: survivorSaved, items: itemsSurvivorSaved }
+            })
+            .catch(function (error) {
+
+                throw new Error(error)
+            })
     },
 
     async Update(survivor) {

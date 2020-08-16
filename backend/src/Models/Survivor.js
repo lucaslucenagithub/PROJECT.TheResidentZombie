@@ -43,6 +43,10 @@ class Survivor extends Model {
             sequelize: connection
         })
     }
+
+    static associate(models) {
+        this.hasMany(models.SurvivorItem, {foreignKey: 'survivor_id'})
+    }
 }
 
 module.exports = Survivor
