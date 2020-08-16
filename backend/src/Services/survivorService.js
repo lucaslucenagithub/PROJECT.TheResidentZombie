@@ -4,6 +4,7 @@ const SurvivorItem = require('../Models/SurvivorItem')
 const survivorItemService = require('./survivorItemService')
 const itemsService = require('../Services/itemsService')
 
+const cryptUtils = require('../utils/cryptUtils')
 const arrayUtils = require('../utils/arrayUtils')
 
 module.exports = {
@@ -21,7 +22,8 @@ module.exports = {
             name: survivor.name,
             age: survivor.age,
             latitude: survivor.latitude,
-            longitude: survivor.longitude
+            longitude: survivor.longitude,
+            password: await cryptUtils.EncryptToBcryptHash(survivor.password)
         })])
             .then(async function ([survivorSaved]) {
 
@@ -43,13 +45,14 @@ module.exports = {
         const survivorExists = await Survivors.findByPk(survivor.id);
 
         if (!survivorExists)
-            return new Error("There's no survivor with this id")
+            throw new Error("There's no survivor with this id")
 
         const survivorUpdated = await Survivors.update({
             name: survivor.name,
             age: survivor.age,
             latitude: survivor.latitude,
-            longitude: survivor.longitude
+            longitude: survivor.longitude,
+            password: survivorExists.password
         },
             {
                 where: {
@@ -68,10 +71,10 @@ module.exports = {
         const survivorExists = await Survivors.findByPk(idSurvivor);
 
         if (!survivorExists)
-            return new Error("There's no survivor with this id")
+            throw new Error("There's no survivor with this id")
 
         if (survivorExists.times_infected_report >= reportsForInfectedStatus)
-            return new Error("Already infected person")
+            throw new Error("Already infected person")
 
         survivorExists.times_infected_report = survivorExists.times_infected_report + 1
 
@@ -81,7 +84,8 @@ module.exports = {
             latitude: survivorExists.latitude,
             longitude: survivorExists.longitude,
             infected: survivorExists.times_infected_report >= reportsForInfectedStatus ? true : false,
-            times_infected_report: survivorExists.times_infected_report
+            times_infected_report: survivorExists.times_infected_report,
+            password: survivorExists.password
         },
             {
                 where: {

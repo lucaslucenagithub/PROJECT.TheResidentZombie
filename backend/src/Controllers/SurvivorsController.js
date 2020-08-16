@@ -3,14 +3,15 @@ const survivorService = require('../Services/survivorService')
 module.exports = {
     async store(req, res) {
         try {
-            const { name, age, latitude, longitude, items } = req.body
+            const { name, age, password, latitude, longitude, items } = req.body
 
             const result = await survivorService.New({
                 name: name,
                 age: age,
                 latitude: latitude,
                 longitude: longitude,
-                items: items
+                items: items,
+                password: password
             })
 
             return res.json(result);

@@ -4,6 +4,7 @@ const express = require('express')
 const SurvivorController = require('./Controllers/SurvivorsController')
 const ItemsController = require('./Controllers/ItemsController')
 const ItemsSurvivorController = require('./Controllers/ItemsSurvivorController')
+const AuthenticationController = require('./Controllers/AuthenticationController')
 
 const routes = express.Router()
 
@@ -15,5 +16,7 @@ routes.post('/survivors/:survivorId/infect', SurvivorController.infect)
 routes.get('/items', ItemsController.show)
 
 routes.get('/survivor/:survivorId/items', ItemsSurvivorController.index)
+
+routes.get('/login', AuthenticationController.login)
 
 module.exports = routes;

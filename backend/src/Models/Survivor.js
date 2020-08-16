@@ -13,7 +13,7 @@ class Survivor extends Model {
                             if (survivor)
                                 done(new Error("A Survivor already picked that name"))
 
-                            done();
+                            done()
                         })
                     },
                     len: [6, 14],
@@ -38,14 +38,28 @@ class Survivor extends Model {
                 }
             },
             infected: DataTypes.BOOLEAN,
-            times_infected_report: DataTypes.INTEGER
+            times_infected_report: DataTypes.INTEGER,
+            password: {
+                type: DataTypes.STRING,
+                notEmpty: true,
+                validate: {
+                    notEmpty: function (pass, done) {
+                        if (!pass || pass == "")
+                            done(new Error('password is required'))
+
+                        done()
+                    }
+                }
+            }
         }, {
             sequelize: connection
-        })
+        }
+
+        )
     }
 
     static associate(models) {
-        this.hasMany(models.SurvivorItem, {foreignKey: 'survivor_id'})
+        this.hasMany(models.SurvivorItem, { foreignKey: 'survivor_id' })
     }
 }
 

@@ -17,6 +17,7 @@ describe('Survivor Routes', () => {
       var data = {
         name: "testing",
         age: 21,
+        password: '123456',
         latitude: "-1111111",
         longitude: "-222222",
         items: [
@@ -37,6 +38,7 @@ describe('Survivor Routes', () => {
       var data = {
         name: "testing",
         age: 21,
+        password: '123456',
         latitude: "-1111111",
         longitude: "-222222",
         items: [
