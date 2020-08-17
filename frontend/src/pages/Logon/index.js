@@ -12,17 +12,20 @@ export default function Logon() {
 
     async function handleLogin(e) {
         e.preventDefault()
+
         try {
             const data = {
-                username,
+                name: username,
                 password,
             }
 
             const response = await api.post('login', data)
 
-            localStorage.setItem('survivorId', response.id)
+            localStorage.setItem('survivorId', response.data.result.id)
 
-            history.push('/profile')
+            console.log(response)
+
+            history.push('/home')
         } catch (err) {
             alert('Login failed')
         }

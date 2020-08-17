@@ -20,7 +20,7 @@ export default function SignUp() {
 
     useEffect(() => {
 
-        setItems(itemsExample)
+        getItems().catch((err) => (alert(err)))
 
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -30,13 +30,40 @@ export default function SignUp() {
                 setLongitude(longitude);
             },
             (err) => {
-                console.log(err);
+                alert(err);
             },
             {
                 timeout: 30000,
             }
         )
     }, [])
+
+    useEffect(() => {
+
+        getItems().catch((err) => (alert(err)))
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+
+                setLatitude(latitude);
+                setLongitude(longitude);
+            },
+            (err) => {
+                alert(err);
+            },
+            {
+                timeout: 30000,
+            }
+        )
+    }, [items])
+
+    async function getItems() {
+
+        const result = await api.get('items')
+
+        setItems(result.data)
+    }
 
     const history = useHistory()
 
@@ -53,13 +80,10 @@ export default function SignUp() {
         }
 
         try {
-            console.log(items)
 
             let invalidAmount = items.filter((item) => (
                 item.amount >= 100000
             ))
-
-            console.log(invalidAmount)
 
             if (invalidAmount.length > 0) {
                 alert('Am I supossed to believe that in a apocalypse you have that amount of items?')

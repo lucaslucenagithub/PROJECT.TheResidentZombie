@@ -17,9 +17,9 @@ module.exports = {
 
         const match = await bcrypt.compare(login.password, survivorExists.dataValues.password);
 
-        if (!match) 
+        if (!match)
             throw new Error("Password invalid")
-        
-        return
+
+        return { message: "Logged in", id: survivorExists.id }
     }
 }

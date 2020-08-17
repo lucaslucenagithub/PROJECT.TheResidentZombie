@@ -17,6 +17,6 @@ routes.get('/items', ItemsController.show)
 
 routes.get('/survivor/:survivorId/items', ItemsSurvivorController.index)
 
-routes.get('/login', AuthenticationController.login)
+routes.post('/login', AuthenticationController.login)
 
 module.exports = routes;

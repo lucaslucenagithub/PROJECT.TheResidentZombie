@@ -10,7 +10,7 @@ module.exports = {
                 password: password
             })
 
-            return res.status(200).send({message: "Login efetuado com sucesso"})
+            return res.status(200).send({ result })
 
         } catch (error) {
             return res.status(400).send(({ message: error['message'] ? error['message'] : 'an error ocurred' }))

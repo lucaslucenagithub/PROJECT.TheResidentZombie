@@ -97,4 +97,6 @@ module.exports = {
         return { survivor: survivorUpdated }
     }
 
+    //TODO: update user coords
+
 }
