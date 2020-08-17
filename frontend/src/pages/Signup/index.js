@@ -41,21 +41,7 @@ export default function SignUp() {
     useEffect(() => {
 
         getItems().catch((err) => (alert(err)))
-
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-
-                setLatitude(latitude);
-                setLongitude(longitude);
-            },
-            (err) => {
-                alert(err);
-            },
-            {
-                timeout: 30000,
-            }
-        )
+        
     }, [items])
 
     async function getItems() {
