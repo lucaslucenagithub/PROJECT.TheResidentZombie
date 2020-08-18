@@ -18,26 +18,36 @@ export default function Home() {
             <div className="wrapper">
                 <div className="sidebar">
                     <h2>Survivors Online</h2>
+                    <h3>Select one to trade</h3>
                     <ul>
-                        <li><a href="#"><i className="fas fa-home"></i>Home</a></li>
-                        <li><a href="#"><i className="fas fa-user"></i>Profile</a></li>
-                        <li><a href="#"><i className="fas fa-address-card"></i>About</a></li>
-                        <li><a href="#"><i className="fas fa-project-diagram"></i>portfolio</a></li>
-                        <li><a href="#"><i className="fas fa-blog"></i>Blogs</a></li>
-                        <li><a href="#"><i className="fas fa-address-book"></i>Contact</a></li>
-                        <li><a href="#"><i className="fas fa-map-pin"></i>Map</a></li>
+                        <li><a href="#">Usuario1</a></li>
+                        <li><a href="#">Usuario2</a></li>
+                        <li><a href="#">Usuario3</a></li>
                     </ul>
                 </div>
                 <div className="main_content">
-                    <div className="header">Home
+                    <div className="header">
+                        Welcome
                     <a type="button" className="btn-logout" onClick={handleLogOut}>
                             Log out
                      </a>
                     </div>
                     <div className="info">
-                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
-                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
-                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
+                        <div>Make trades in real time with other survivors, report an infected person, or just check the data below</div>
+                        <ul className="report">
+                            <li className="percentage-infected">
+                                Percentage of infected survivors: <b>50%</b>
+                            </li>
+                            <li className="percentage-non-infected">
+                                Percentage of non-infected survivors: <b>50%</b>
+                            </li>
+                            <li className="average-amount-items">
+                                The average amount of each kind of resource by the survivor: <b>5</b>
+                            </li>
+                            <li className="points-lost">
+                                Points lost because of an infected survivor: <b>5000</b>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

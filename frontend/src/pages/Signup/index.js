@@ -11,13 +11,6 @@ export default function SignUp() {
     const [items, setItems] = useState([])
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
-
-    const itemsExample = [
-        { id: 1, name: "First", points: 2, amount: 0 },
-        { id: 2, name: "Second", points: 2, amount: 0 },
-        { id: 3, name: "Third", points: 2, amount: 0 }
-    ]
-
     useEffect(() => {
 
         getItems().catch((err) => (alert(err)))
@@ -37,12 +30,6 @@ export default function SignUp() {
             }
         )
     }, [])
-
-    useEffect(() => {
-
-        getItems().catch((err) => (alert(err)))
-        
-    }, [items])
 
     async function getItems() {
 
