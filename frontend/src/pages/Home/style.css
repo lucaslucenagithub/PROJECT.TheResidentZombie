@@ -1,4 +1,4 @@
-a{
+a {
   text-decoration: none;
 }
 
@@ -14,15 +14,16 @@ a{
   padding: 30px 0px;
   position: fixed;
 }
+
 .wrapper .sidebar ul {
-    margin: 0;
-    padding: 0;
-    width: 400px;
-    height: 100%;
-    background: #000000;
-    padding: 30px 0px;
-    position: fixed;
-  }
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  height: 100%;
+  background: #000000;
+  padding: 30px 0px;
+  position: fixed;
+}
 .wrapper .sidebar h2 {
   color: #fff;
   text-transform: uppercase;
@@ -35,11 +36,14 @@ a{
 }
 
 .wrapper .sidebar ul li {
+  display: flex;
+  flex-direction: row;
   padding: 15px;
   border-bottom: 1px solid #bdb8d7;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   color: #bdb8d7;
+  justify-content: space-between;
 }
 
 .wrapper .sidebar ul li a {
@@ -47,8 +51,15 @@ a{
   display: block;
 }
 
-.wrapper .sidebar ul li a .fas {
-  width: 25px;
+.wrapper .sidebar ul li .users-btn {
+  display: flex;
+  flex-direction: row;
+  float: right;
+}
+
+.wrapper .sidebar ul li .users-btn a {
+  color: #8a0303;
+  margin-right: 10px;
 }
 
 .wrapper .sidebar ul li:hover {
@@ -74,6 +85,11 @@ a{
   margin-left: 400px;
 }
 
+.wrapper h1 {
+  padding: 15px;
+  color: #fff;
+}
+
 .wrapper .main_content .header {
   padding: 20px;
   background: #3a0001;
@@ -96,5 +112,15 @@ a{
 }
 
 .wrapper .main_content .info div {
+  margin-bottom: 20px;
+}
+
+.wrapper .main_content .inventory {
+  margin: 20px;
+  color: #fff;
+  line-height: 25px;
+}
+
+.wrapper .main_content .inventory div {
   margin-bottom: 20px;
 }

@@ -17,12 +17,30 @@ export default function Home() {
         <>
             <div className="wrapper">
                 <div className="sidebar">
-                    <h2>Survivors Online</h2>
+                    <h2>Survivors</h2>
                     <h3>Select one to trade</h3>
                     <ul>
-                        <li><a href="#">Usuario1</a></li>
-                        <li><a href="#">Usuario2</a></li>
-                        <li><a href="#">Usuario3</a></li>
+                        <li>
+                            <a href="#1">Usuario1</a>
+                            <div className="users-btn">
+                                <a className="trade-btn" href="#2">Trade</a>
+                                <a className="infect-btn" href="#2">Infect</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#1">Usuario1</a>
+                            <div className="users-btn">
+                                <a className="trade-btn" href="#2">Trade</a>
+                                <a className="infect-btn" href="#2">Infect</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#1">Usuario1</a>
+                            <div className="users-btn">
+                                <a className="trade-btn" href="#2">Trade</a>
+                                <a className="infect-btn" href="#2">Infect</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <div className="main_content">
@@ -32,8 +50,9 @@ export default function Home() {
                             Log out
                      </a>
                     </div>
+                    <h1>Make trades in real time with other survivors, report an infected person, or just check the data below</h1>
                     <div className="info">
-                        <div>Make trades in real time with other survivors, report an infected person, or just check the data below</div>
+                        <h2>Report</h2>
                         <ul className="report">
                             <li className="percentage-infected">
                                 Percentage of infected survivors: <b>50%</b>
@@ -46,6 +65,23 @@ export default function Home() {
                             </li>
                             <li className="points-lost">
                                 Points lost because of an infected survivor: <b>5000</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="inventory">
+                        <h2>My inventory</h2>
+                        <ul className="items-inventory">
+                            <li>
+                                <b>Item1:</b> 200 quantity
+                            </li>
+                            <li>
+                                <b>Item2:</b> 200 quantity
+                            </li>
+                            <li>
+                                <b>Item3:</b> 200 quantity
+                            </li>
+                            <li>
+                                <b>Item4:</b> 200 quantity
                             </li>
                         </ul>
                     </div>
