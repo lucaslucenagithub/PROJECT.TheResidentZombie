@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
+import Modal from '../../components/modalTrade/index'
+
 import api from '../../services/api'
 import './style.css'
 
@@ -8,7 +10,7 @@ export default function Home() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [users, setUsers] = useState([]);
-    let [timeout, setTimeout] = useState(0);
+    const [modalVisible, setModalVisible] = useState(false);
 
     const history = useHistory()
 
@@ -33,6 +35,14 @@ export default function Home() {
     function handleLogOut() {
         localStorage.clear()
         history.push('/')
+    }
+
+    function showModal() {
+        setModalVisible(true)
+    }
+
+    function hideModal() {
+        setModalVisible(false)
     }
 
     async function handleUpdateCoords() {
@@ -81,15 +91,16 @@ export default function Home() {
         <>
             <div className="wrapper">
                 <div className="sidebar">
+                    {/* {modalVisible && <Modal onClose={() => { hideModal() }} show={modalVisible} />} */}
                     <h2>Survivors</h2>
                     <h3>Select one to trade</h3>
                     <ul>
                         {
                             users.map(item => (
-                                <li>
+                                <li key={item.id}>
                                     {item.name}
                                     <div className="users-btn">
-                                        <a className="trade-btn" href="#">Trade</a>
+                                        <a className="trade-btn" href="#" onClick={() => { showModal() }}>Trade</a>
                                         <a className="infect-btn" href="#" onClick={() => { handleInfect(item.id) }}>Infect</a>
                                     </div>
                                 </li>
