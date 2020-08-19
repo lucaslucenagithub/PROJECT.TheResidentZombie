@@ -9,8 +9,10 @@ const AuthenticationController = require('./Controllers/AuthenticationController
 const routes = express.Router()
 
 // Routes
+routes.get('/survivors', SurvivorController.show)
+routes.get('/survivors/:survivorId', SurvivorController.index)
 routes.post('/survivors', SurvivorController.store)
-routes.put('/survivors', SurvivorController.update)
+routes.put('/survivors/coords', SurvivorController.updateCoords)
 routes.post('/survivors/:survivorId/infect', SurvivorController.infect)
 
 routes.get('/items', ItemsController.show)

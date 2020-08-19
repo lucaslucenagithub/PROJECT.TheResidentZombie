@@ -5,12 +5,76 @@ import api from '../../services/api'
 import './style.css'
 
 export default function Home() {
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
+    const [users, setUsers] = useState([]);
+    let [timeout, setTimeout] = useState(0);
 
     const history = useHistory()
+
+    const id = localStorage.getItem('survivorId')
+    const username = localStorage.getItem('username')
+
+    useEffect(() => {
+
+        let usersList = []
+
+        async function getUsers() {
+            const result = await api.get('survivors')
+            setUsers(result.data.survivor)
+        }
+
+        getUsers()
+            .catch(function (err) {
+                alert(err)
+            })
+    }, [])
 
     function handleLogOut() {
         localStorage.clear()
         history.push('/')
+    }
+
+    async function handleUpdateCoords() {
+        try {
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+
+                    setLatitude(latitude);
+                    setLongitude(longitude);
+                },
+                (err) => {
+                    alert(err);
+                },
+                {
+                    timeout: 30000,
+                }
+            )
+
+            const data = {
+                id,
+                latitude,
+                longitude,
+            }
+
+            await api.put('survivors/coords', data)
+
+            alert('coords updated sucessful')
+        }
+        catch (err) {
+            alert(err)
+        }
+    }
+
+    async function handleInfect(survivorId) {
+        try {
+            await api.post(`survivors/${survivorId}/infect`)
+            alert('infect report sent sucessful')
+        } catch (error) {
+            alert(error.response.data.message)
+        }
     }
 
     return (
@@ -20,33 +84,23 @@ export default function Home() {
                     <h2>Survivors</h2>
                     <h3>Select one to trade</h3>
                     <ul>
-                        <li>
-                            <a href="#1">Usuario1</a>
-                            <div className="users-btn">
-                                <a className="trade-btn" href="#2">Trade</a>
-                                <a className="infect-btn" href="#2">Infect</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#1">Usuario1</a>
-                            <div className="users-btn">
-                                <a className="trade-btn" href="#2">Trade</a>
-                                <a className="infect-btn" href="#2">Infect</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#1">Usuario1</a>
-                            <div className="users-btn">
-                                <a className="trade-btn" href="#2">Trade</a>
-                                <a className="infect-btn" href="#2">Infect</a>
-                            </div>
-                        </li>
+                        {
+                            users.map(item => (
+                                <li>
+                                    {item.name}
+                                    <div className="users-btn">
+                                        <a className="trade-btn" href="#">Trade</a>
+                                        <a className="infect-btn" href="#" onClick={() => { handleInfect(item.id) }}>Infect</a>
+                                    </div>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
                 <div className="main_content">
                     <div className="header">
-                        Welcome
-                    <a type="button" className="btn-logout" onClick={handleLogOut}>
+                        <a href="#" onClick={handleUpdateCoords}>Keep your coordinates updated, {username}</a>
+                        <a type="button" className="btn-logout" onClick={handleLogOut}>
                             Log out
                      </a>
                     </div>

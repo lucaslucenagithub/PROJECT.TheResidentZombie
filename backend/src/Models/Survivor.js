@@ -7,11 +7,18 @@ class Survivor extends Model {
                 type: DataTypes.STRING,
                 validate: {
                     isUnique: function (name, done) {
+                        var self = this;
                         Survivor.findOne({
                             where: { name: name }
                         }).then(function (survivor) {
-                            if (survivor)
-                                done(new Error("A Survivor already picked that name"))
+
+                            if (!self.id || self.id == 0) {
+                                
+                                if (survivor)
+                                    done(new Error("A Survivor already picked that name"))
+
+                                done()
+                            }
 
                             done()
                         })
@@ -28,14 +35,10 @@ class Survivor extends Model {
                 }
             },
             latitude: {
-                type: DataTypes.STRING, validate: {
-                    notEmpty: true,
-                }
+                type: DataTypes.STRING
             },
             longitude: {
-                type: DataTypes.STRING, validate: {
-                    notEmpty: true,
-                }
+                type: DataTypes.STRING
             },
             infected: DataTypes.BOOLEAN,
             times_infected_report: DataTypes.INTEGER,

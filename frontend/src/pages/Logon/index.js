@@ -22,12 +22,13 @@ export default function Logon() {
             const response = await api.post('login', data)
 
             localStorage.setItem('survivorId', response.data.result.id)
+            localStorage.setItem('username', username)
 
             console.log(response)
 
             history.push('/home')
         } catch (err) {
-            alert('Login failed')
+            alert(err.response.data.message)
         }
     }
 

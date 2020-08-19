@@ -56,17 +56,15 @@ describe('Survivor Routes', () => {
       expect(res.body).toHaveProperty('message')
     }),
 
-    it('should update survivor', async () => {
+    it('should update a survivor coords', async () => {
       var data = {
         id: 1,
-        name: "testingUpdated",
-        age: 21,
         latitude: "-1111111",
         longitude: "-222222"
       };
 
       const res = await request(app)
-        .put('/survivors')
+        .put('/survivors/coords')
         .send(data)
 
       expect(res.statusCode).toEqual(200)

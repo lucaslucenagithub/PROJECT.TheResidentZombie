@@ -11,6 +11,7 @@ export default function SignUp() {
     const [items, setItems] = useState([])
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
+
     useEffect(() => {
 
         getItems().catch((err) => (alert(err)))
@@ -69,7 +70,7 @@ export default function SignUp() {
             history.push('/')
 
         } catch (err) {
-            alert(err.message)
+            alert(err.response.data.message)
         }
     }
 

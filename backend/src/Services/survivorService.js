@@ -8,6 +8,23 @@ const cryptUtils = require('../utils/cryptUtils')
 const arrayUtils = require('../utils/arrayUtils')
 
 module.exports = {
+    async GetAll() {
+
+    const survivorsList = await Survivors.findAll();
+
+    return { survivor: survivorsList }
+},
+
+
+    async GetById(id) {
+
+        const survivorExists = await Survivors.findByPk(id);
+
+        if (!survivorExists)
+            throw new Error("There's no survivor with this id")
+
+        return { survivor: survivorExists }
+    },
 
     async New(survivor) {
         const availableItems = await itemsService.GetAll();
@@ -40,30 +57,6 @@ module.exports = {
             })
     },
 
-    async Update(survivor) {
-
-        const survivorExists = await Survivors.findByPk(survivor.id);
-
-        if (!survivorExists)
-            throw new Error("There's no survivor with this id")
-
-        const survivorUpdated = await Survivors.update({
-            name: survivor.name,
-            age: survivor.age,
-            latitude: survivor.latitude,
-            longitude: survivor.longitude,
-            password: survivorExists.password
-        },
-            {
-                where: {
-                    id: survivor.id
-                }
-            }
-        )
-
-        return { survivor: survivorUpdated }
-    },
-
     async Infect(idSurvivor) {
 
         const reportsForInfectedStatus = 5
@@ -79,6 +72,7 @@ module.exports = {
         survivorExists.times_infected_report = survivorExists.times_infected_report + 1
 
         const survivorUpdated = await Survivors.update({
+            id: idSurvivor,
             name: survivorExists.name,
             age: survivorExists.age,
             latitude: survivorExists.latitude,
@@ -95,8 +89,31 @@ module.exports = {
         )
 
         return { survivor: survivorUpdated }
-    }
+    },
 
-    //TODO: update user coords
+    async UpdateCoords(idSurvivor, latitude, longitude) {
+
+        const survivorExists = await Survivors.findByPk(idSurvivor);
+
+        if (!survivorExists)
+            throw new Error("There's no survivor with this id")
+
+        const survivorUpdated = await Survivors.update({
+            id: idSurvivor,
+            name: survivorExists.name,
+            age: survivorExists.age,
+            latitude: latitude,
+            longitude: longitude,
+            password: survivorExists.password
+        },
+            {
+                where: {
+                    id: idSurvivor
+                }
+            }
+        )
+
+        return { survivor: survivorUpdated }
+    }
 
 }
