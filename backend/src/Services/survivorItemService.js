@@ -1,5 +1,4 @@
 const SurvivorItem = require('../Models/SurvivorItem')
-const itemsService = require('./itemsService')
 
 const Survivor = require('../Models/Survivor')
 const Item = require('../Models/Item')
@@ -10,7 +9,7 @@ module.exports = {
 
         let itemsSaved = new Array()
 
-        for (item of survivorItems.items) {
+        for (let item of survivorItems.items) {
             itemsSaved.push(await SurvivorItem.create({
                 survivor_id: survivorItems.survivorId,
                 item_id: item.id,
