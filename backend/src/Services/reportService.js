@@ -13,7 +13,7 @@ module.exports = {
             x.dataValues.infected
         ))
 
-        const result = (survivorsInfected.length / allSurvivors) * 100
+        const result = (survivorsInfected.length / allSurvivors.length) * 100
 
         return result
     },
@@ -26,7 +26,7 @@ module.exports = {
             !x.dataValues.infected
         ))
 
-        const result = (survivorsNonInfected.length / allSurvivors) * 100
+        const result = (survivorsNonInfected.length / allSurvivors.length) * 100
 
         return result
     },
@@ -43,15 +43,15 @@ module.exports = {
 
         for (const itemKind of itemsKinds) {
 
-            let itemFilteredByKind = itemsSurvivors.filter((x) => (
+            const itemFilteredByKind = itemsSurvivors.filter((x) => (
                 x.dataValues.item_id == itemKind.dataValues.id
-            ))
+            )).map(a => a.dataValues.amount)
 
-            let itemKIndAmountsSum = itemFilteredByKind.reduce(function (a, b) {
-                return a + b;
-            }, 0);
+            let itemKindAmountsSum = (itemFilteredByKind.reduce(function (a, b) {
+                return a + b
+            }, 0))
 
-            let amountAverageBySurvivor = itemKIndAmountsSum / allSurvivorsCount
+            let amountAverageBySurvivor = itemKindAmountsSum / allSurvivorsCount
 
             result.push({
                 item: itemKind.dataValues.name,
@@ -69,23 +69,17 @@ module.exports = {
                 include: [{
                     model: Survivor,
                     where: { infected: true }
-                }]
-            },
-            {
-                include: [{
+                },
+                {
                     model: Item
                 }]
             }
-        ))
+        )).map((a) => ({points: a.dataValues.Item.dataValues.points, amount: a.dataValues.amount}))
 
-        const amountTimePoints = survivorsInfectedInventory.reduce(function (a, b) {
-            return a * b;
-        }, 0);
+        const sumAmountTimePoints = survivorsInfectedInventory.reduce(function (a, b) {
+            return a + (b.amount * b.points);
+        }, 0)
 
-        const result = amountTimePoints.reduce(function (a, b) {
-            return a + b;
-        }, 0);
-
-        return result
+        return sumAmountTimePoints
     }
 }

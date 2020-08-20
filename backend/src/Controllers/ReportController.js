@@ -1,9 +1,9 @@
 const reportService = require('../Services/reportService')
 
 module.exports = {
-    async infectedSurvivorsPercentage(res) {
+    async infectedSurvivorsPercentage(req, res) {
         try {
-            const result = reportService.infectedSurvivorsPercentage()
+            const result = await reportService.infectedSurvivorsPercentage()
 
             return res.json(result)
 
@@ -12,9 +12,9 @@ module.exports = {
         }
     },
 
-    async nonInfectedSurvivorsPercentage(res) {
+    async nonInfectedSurvivorsPercentage(req, res) {
         try {
-            const result = reportService.nonInfectedSurvivorsPercentage()
+            const result = await reportService.nonInfectedSurvivorsPercentage()
 
             return res.json(result)
 
@@ -23,9 +23,9 @@ module.exports = {
         }
     },
 
-    async itemsKindAmountAverageBySurvivor(res) {
+    async itemsKindAmountAverageBySurvivor(req, res) {
         try {
-            const result = reportService.itemsKindAmountAverageBySurvivor()
+            const result = await reportService.itemsKindAmountAverageBySurvivor()
 
             return res.json(result)
 
@@ -34,9 +34,9 @@ module.exports = {
         }
     },
 
-    async pointsLostBecauseInfect(res) {
+    async pointsLostBecauseInfect(req, res) {
         try {
-            const result = reportService.pointsLostBecauseInfect()
+            const result = await reportService.pointsLostBecauseInfect()
 
             return res.json(result)
 

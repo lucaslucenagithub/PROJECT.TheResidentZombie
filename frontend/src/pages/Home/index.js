@@ -11,6 +11,12 @@ export default function Home() {
     const [longitude, setLongitude] = useState('');
     const [users, setUsers] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
+    const [inventoryVisible, setInventoryVisible] = useState(false);
+    const [itensInventory, setItensInventory] = useState([]);
+    const [infectedPercentagem, setInfectedPercentagem] = useState(0);
+    const [nonInfectedPercentagem, setNonInfectedPercentagem] = useState(0);
+    const [pointsLostInfection, setPointsLostInfection] = useState(0);
+    const [itemsAverageAmountBySurvivor, setItemsAverageAmountBySurvivor] = useState([]);
 
     const history = useHistory()
 
@@ -26,10 +32,29 @@ export default function Home() {
             setUsers(result.data.survivor)
         }
 
+        async function getReports() {
+            
+            const resultInfectedPercentagem = await api.get('survivors/infected/percentage')
+            const resultNonInfectedPercentagem = await api.get('survivors/non_infected/percentage')
+            const resultInfectedPointsLost = await api.get('survivors/infected/points_lost')
+            const resultItemsAmountAverage = await api.get('survivors/items_amount/average')
+
+            setInfectedPercentagem(resultInfectedPercentagem.data)
+            setNonInfectedPercentagem(resultNonInfectedPercentagem.data)
+            setPointsLostInfection(resultInfectedPointsLost.data)
+            setItemsAverageAmountBySurvivor(resultItemsAmountAverage.data)
+        }
+
         getUsers()
             .catch(function (err) {
                 alert(err)
             })
+
+        getReports()
+            .catch(function (err) {
+                alert(err)
+            })
+
     }, [])
 
     function handleLogOut() {
@@ -43,6 +68,26 @@ export default function Home() {
 
     function hideModal() {
         setModalVisible(false)
+    }
+
+    function showInventory() {
+
+        async function getItensInventory() {
+            const result = await api.get(`survivor/${id}/items`)
+            setItensInventory(result.data)
+        }
+
+        getItensInventory()
+            .catch(function (err) {
+                alert(err.response.data.message)
+            })
+
+        setInventoryVisible(true)
+    }
+
+    function hideInventory() {
+        setItensInventory([])
+        setInventoryVisible(false)
     }
 
     async function handleUpdateCoords() {
@@ -110,7 +155,7 @@ export default function Home() {
                 </div>
                 <div className="main_content">
                     <div className="header">
-                        <a href="#" onClick={handleUpdateCoords}>Keep your coordinates updated, {username}</a>
+                        <a href="#" onClick={handleUpdateCoords}>Click here and keep your coordinates updated, {username}</a>
                         <a type="button" className="btn-logout" onClick={handleLogOut}>
                             Log out
                      </a>
@@ -120,35 +165,42 @@ export default function Home() {
                         <h2>Report</h2>
                         <ul className="report">
                             <li className="percentage-infected">
-                                Percentage of infected survivors: <b>50%</b>
+                                Percentage of infected survivors: <b>{infectedPercentagem}%</b>
                             </li>
                             <li className="percentage-non-infected">
-                                Percentage of non-infected survivors: <b>50%</b>
-                            </li>
-                            <li className="average-amount-items">
-                                The average amount of each kind of resource by the survivor: <b>5</b>
+                                Percentage of non-infected survivors: <b>{nonInfectedPercentagem}%</b>
                             </li>
                             <li className="points-lost">
-                                Points lost because of an infected survivor: <b>5000</b>
+                                Points lost because of an infected survivor: <b>{pointsLostInfection} points</b>
+                            </li>
+                            <li className="average-amount-items">
+                                The average amount of each kind of resource by one survivor:
+                                <ul>
+                                    {
+                                        itemsAverageAmountBySurvivor.map(item => (
+                                            <li>
+                                                {item.item}: <b>{item.amountAverageBySurvivor} avg</b>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
                             </li>
                         </ul>
                     </div>
                     <div className="inventory">
                         <h2>My inventory</h2>
-                        <ul className="items-inventory">
-                            <li>
-                                <b>Item1:</b> 200 quantity
-                            </li>
-                            <li>
-                                <b>Item2:</b> 200 quantity
-                            </li>
-                            <li>
-                                <b>Item3:</b> 200 quantity
-                            </li>
-                            <li>
-                                <b>Item4:</b> 200 quantity
-                            </li>
-                        </ul>
+                        <button onClick={() => { showInventory() }}>Abrir</button>
+                        <button onClick={() => { hideInventory() }}>Fechar</button>
+                        {
+                            inventoryVisible &&
+                            <ul className="items-inventory">
+                                {itensInventory.map(item => (
+                                    <li key={item.id}>
+                                        {item.name}: {item.amount}
+                                    </li>
+                                ))}
+                            </ul>
+                        }
                     </div>
                 </div>
             </div>
